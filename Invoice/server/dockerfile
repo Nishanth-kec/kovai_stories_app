@@ -1,0 +1,23 @@
+# ---- BASE IMAGE ----
+FROM node:18-alpine
+
+# ---- CREATE WORKDIR ----
+WORKDIR /app
+
+# ---- COPY PACKAGE FILES ----
+COPY package*.json ./
+
+# ---- INSTALL DEPENDENCIES ----
+RUN npm install --production
+
+# ---- COPY SOURCE CODE ----
+COPY . .
+
+# ---- EXPOSE API PORT ----
+EXPOSE 5000
+
+# ---- SET ENV ----
+ENV NODE_ENV=production
+
+# ---- START SERVER ----
+CMD ["node", "server.js"]
